@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор зоны | Праздник в каждый дом</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        .location-details {
+            background-color: #FFF8E8;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid #B5EAD7;
+        }
+        
+        .zone-selection {
+            margin-top: 2rem;
+        }
+        
+        .zone-map {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .zone {
+            padding: 1.5rem;
+            border: 2px solid #B5EAD7;
+            border-radius: 16px;
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .zone:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(181, 234, 215, 0.3);
+        }
+        
+        .zone.selected {
+            background-color: #FF9BB3;
+            color: white;
+            animation: bounce 0.5s;
+        }
+        
+        .zone::before {
+            content: "🎈";
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 1.5rem;
+            z-index: 2;
+        }
+        
+        .selected-zone {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid #FF9BB3;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .selected-zone p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        #book-btn {
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .zone-map {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Праздник в каждый дом</h1>
+            <p>Подарим волшебство для Ваших детей!</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html#promo">Акции</a></li>
+                <li><a href="index.html#search">Поиск</a></li>
+                <li><a href="booking.html">Управление бронированием</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="location-details">
+            <h2>Сказочный лес</h2>
+            <p><strong>Адрес:</strong> ул. Праздничная, 15</p>
+            <p><strong>Дата:</strong> 15.06.2023</p>
+            <p><strong>Вместимость:</strong> до 25 человек</p>
+            
+            <div class="zone-selection">
+                <h3>Выберите зону</h3>
+                <div class="zone-map">
+                    <div class="zone" data-zone="A" data-price="5000">
+                        <span>Зона A</span>
+                        <span>5 000 ₽</span>
+                    </div>
+                    <div class="zone" data-zone="B" data-price="7000">
+                        <span>Зона B</span>
+                        <span>7 000 ₽</span>
+                    </div>
+                    <div class="zone" data-zone="C" data-price="6000">
+                        <span>Зона C</span>
+                        <span>6 000 ₽</span>
+                    </div>
+                    <div class="zone" data-zone="D" data-price="8000">
+                        <span>Зона D</span>
+                        <span>8 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="selected-zone">
+                    <p>Выбрана зона: <span id="selected-zone-name">не выбрана</span></p>
+                    <p>Стоимость: <span id="selected-zone-price">0</span> ₽</p>
+                    <a href="booking.html" class="btn" id="book-btn" disabled>Перейти к бронированию</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <p>Телефон: 8 (800) 111-20-20</p>
+            </div>
+            <div class="footer-links">
+                <a href="http://xxxxxx-m1.wsr.ru/return">Возврат</a>
+                <a href="http://xxxxxx-m1.wsr.ru/feedback">Обратная связь</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Декоративные элементы -->
+    <div class="decorative" style="top:10%; left:5%; animation-delay:0s;">🎨</div>
+    <div class="decorative" style="top:20%; right:8%; animation-delay:1s;">🎪</div>
+    <div class="decorative" style="top:30%; left:15%; animation-delay:2s;">🎠</div>
+    <div class="decorative" style="top:40%; right:20%; animation-delay:3s;">🎡</div>
+    <div class="decorative" style="top:50%; left:25%; animation-delay:4s;">🎢</div>
+
+    <script>
+        document.querySelectorAll('.zone').forEach(zone => {
+            zone.addEventListener('click', function() {
+                // Удаляем выделение у всех зон
+                document.querySelectorAll('.zone').forEach(z => {
+                    z.classList.remove('selected');
+                });
+
+                // Добавляем выделение выбранной зоне
+                this.classList.add('selected');
+
+                // Обновляем информацию о выбранной зоне
+                document.getElementById('selected-zone-name').textContent = this.dataset.zone;
+                document.getElementById('selected-zone-price').textContent = this.dataset.price;
+
+                // Активируем кнопку
+                document.getElementById('book-btn').removeAttribute('disabled');
+            });
+        });
+    </script>
+</body>
+</html>

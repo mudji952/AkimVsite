@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование | Праздник в каждый дом</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Праздник в каждый дом</h1>
+            <p>Подарим волшебство для Ваших детей!</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html#promo">Акции</a></li>
+                <li><a href="index.html#search">Поиск</a></li>
+                <li><a href="booking.html">Управление бронированием</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="booking-form">
+            <h2>Оформление бронирования</h2>
+            
+            <div class="order-details">
+                <h3>Данные о заказе</h3>
+                <p><strong>Регион:</strong> Центральный</p>
+                <p><strong>Локация:</strong> Сказочный лес</p>
+                <p><strong>Адрес:</strong> ул. Праздничная, 15</p>
+                <p><strong>Дата:</strong> 15.06.2023</p>
+                <p><strong>Выбранная зона:</strong> A</p>
+                <p><strong>Стоимость зоны:</strong> 5 000 ₽</p>
+            </div>
+            
+            <form>
+                <h3>Контактные данные</h3>
+                <div class="form-group">
+                    <label for="name">ФИО:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <h3>Дополнительные услуги</h3>
+                <div class="services">
+                    <label class="service-checkbox">
+                        <input type="checkbox" name="service" value="food">
+                        <span>Организация питания (+3 000 ₽)</span>
+                    </label>
+                    <label class="service-checkbox">
+                        <input type="checkbox" name="service" value="animator">
+                        <span>Услуги аниматоров (+5 000 ₽)</span>
+                    </label>
+                    <label class="service-checkbox">
+                        <input type="checkbox" name="service" value="host">
+                        <span>Услуги ведущего (+4 000 ₽)</span>
+                    </label>
+                    <label class="service-checkbox">
+                        <input type="checkbox" name="service" value="taxi">
+                        <span>Услуги детского такси (+2 000 ₽)</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment">Дополнительные пожелания:</label>
+                    <textarea id="comment" rows="4"></textarea>
+                </div>
+                
+                <div class="total">
+                    <h3>Итоговая стоимость: <span id="total-price">5 000</span> ₽</h3>
+                </div>
+                
+                <button type="submit" class="btn">Подтвердить бронирование</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <p>Телефон: 8 (800) 111-20-20</p>
+            </div>
+            <div class="footer-links">
+                <a href="http://xxxxxx-m1.wsr.ru/return">Возврат</a>
+                <a href="http://xxxxxx-m1.wsr.ru/feedback">Обратная связь</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Расчет итоговой стоимости
+        const checkboxes = document.querySelectorAll('input[name="service"]');
+        const totalPriceElement = document.getElementById('total-price');
+        let basePrice = 5000;
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                let total = basePrice;
+                
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        switch(cb.value) {
+                            case 'food': total += 3000; break;
+                            case 'animator': total += 5000; break;
+                            case 'host': total += 4000; break;
+                            case 'taxi': total += 2000; break;
+                        }
+                    }
+                });
+                
+                totalPriceElement.textContent = total;
+            });
+        });
+    </script>
+</body>
+</html>
